@@ -8,6 +8,7 @@
 public class Main {
   public static void main(String args[]) {
     String fileName = takeArguments(args);
+    Register.Initiate();
     Program p = new Program(fileName);
 
     RISCInstruction rs = p.getNextCommand();
