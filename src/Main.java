@@ -15,11 +15,10 @@ public class Main {
     Program p = new Program(fileName);
 
     RISCInstruction rs = p.getNextCommand();
-    if (rs.isLabel()) System.out.println(rs.getLabel());
-    p.getNextCommand().exeCmd();
-    p.getNextCommand().exeCmd();
-    p.getNextCommand().exeCmd();
-    p.getNextCommand().exeCmd();
+    while (rs != null) {
+      rs.exeCmd();
+      rs = p.getNextCommand();
+    }
   }
 
   private static String takeArguments(String[] args) {
