@@ -11,6 +11,7 @@ public class RISCInstruction {
   private boolean isImmediate;
   private int immediate;
   private final String methodName = "exeCmd";
+  private short modifier;
 
   public RISCInstruction() {
   }
@@ -54,6 +55,22 @@ public class RISCInstruction {
   private void getInstruction() {
     cmd = cmd.trim();
     Instruction = truncateAt(' ');
+    assignModifier();
+  }
+
+  private void assignModifier() {
+    switch (cmd.charAt(cmd.length() - 1)) {
+      case 'u':
+        modifier = 1;
+        break;
+      case 'h':
+        modifier = 2;
+        break;
+      default:
+        modifier = 0;
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> its nothing bitches");
+    }
+    cmd = cmd.substring(0, cmd.length() - 1);
   }
 
   private String truncateAt(char cha) {
@@ -88,6 +105,10 @@ public class RISCInstruction {
     } catch (ClassNotFoundException e) {
       Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
     }
+  }
+
+  public short getModifier() {
+    return modifier;
   }
 
   private String getClassName() {
