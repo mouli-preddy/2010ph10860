@@ -46,7 +46,7 @@ public class Register {
 
   public int get(String regI) {
     int index = getIndex(regI);
-    if (index >= 0) return register[index];
+    if (index >= 0 && index < 16) return register[index];
     else {
       Debug.write("The register >>" + regI + "<< is not valid");
       return 0;
