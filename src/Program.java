@@ -1,6 +1,7 @@
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -33,17 +34,23 @@ public class Program {
     } catch (EOFException e) {
       Debug.write("EOF reached in the given file");
       return null;
+    } catch (NoSuchElementException e) {
+      Debug.write("EOF reached in the given file");
+      return null;
     }
   }
 
   private static String nextLine() throws EOFException {
-    String result = fileSc.nextLine();
-    result = result.trim();
-    return result;
+    if (fileSc.hasNextLine()) {
+      String result = fileSc.nextLine();
+      result = result.trim();
+      return result;
+    } else return null;
   }
 
   public RISCInstruction getNextCommand() {
     String newLine = nextCommandStr();
+    Debug.command(newLine);
     if (newLine == null) return null;
     else {
       RISCInstruction cmd = new RISCInstruction(newLine);
