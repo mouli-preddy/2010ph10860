@@ -53,7 +53,7 @@ public class RISCInstruction {
 
   private void getInstruction() {
     cmd = cmd.trim();
-    Instruction = truncateAt(' '); 
+    Instruction = truncateAt(' ');
   }
 
   private String truncateAt(char cha) {
@@ -74,8 +74,7 @@ public class RISCInstruction {
 
   public void exeCmd() {
     try {
-      System.out.println(getClassName());
-      Class cls = Class.forName(">>>>"+getClassName()+"<<<<");
+      Class cls = Class.forName(getClassName());
       Method meth = cls.getMethod(methodName, this.getClass());
       meth.invoke(cls.newInstance(), this);
     } catch (NoSuchMethodException e) {
