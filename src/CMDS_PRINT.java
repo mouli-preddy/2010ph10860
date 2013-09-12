@@ -6,6 +6,7 @@
  */
 public class CMDS_PRINT extends RISCInstruction {
   public static void exeCmd(RISCInstruction risc) {
-
+    int valueObtained = Main.register.get(risc.getArg1());
+    Debug.forceWrite(risc.getArg1() + "=" + valueObtained);
   }
 }

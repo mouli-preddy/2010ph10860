@@ -95,6 +95,7 @@ public class RISCInstruction {
   private void getInstruction() {
     cmd = cmd.trim();
     Instruction = truncateAt(' ');
+    Instruction = Instruction.replaceAll(".", "");
     assignModifier();
   }
 
