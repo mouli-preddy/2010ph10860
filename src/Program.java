@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Program {
 
-  private static RandomAccessFile fileSc;
+  private RandomAccessFile fileSc;
 
   public Program(String fileName) {
     try {
@@ -22,7 +22,7 @@ public class Program {
     }
   }
 
-  private static String nextCommandStr() {
+  private String nextCommandStr() {
     String result = "";
     try {
       while (result == "") {
@@ -35,7 +35,7 @@ public class Program {
     }
   }
 
-  private static String nextLine() throws IOException {
+  private String nextLine() throws IOException {
     String result = null;
     result = fileSc.readLine();
     result = result.trim();
@@ -49,6 +49,23 @@ public class Program {
     else {
       RISCInstruction cmd = new RISCInstruction(newLine);
       return cmd;
+    }
+  }
+
+  public long getFilePointer() {
+    try {
+      return fileSc.getFilePointer();
+    } catch (Exception e) {
+      Debug.forceQuit("NEVER REACHING:: the file pointer is not correct");
+    }
+    return 0;
+  }
+
+  public void setPointer(long pointer) {
+    try {
+      fileSc.seek(pointer);
+    } catch (Exception e) {
+      Debug.forceQuit("Your stack pointer is corrupted");
     }
   }
 }

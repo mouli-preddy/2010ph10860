@@ -43,3 +43,7 @@ public class Main {
 //
 //  }
 //}
+
+
+//pattern for random stack pointer
+//p.setPointer(pinter);
