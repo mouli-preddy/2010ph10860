@@ -31,14 +31,14 @@ public class RISCInstruction {
 
   private String pullArgAfter2() {
     String result = "";
-    if (cmd.length() > 1) {
+    if (cmd.length() > 0) {
       if (cmd.charAt(0) == 'r') {
         isImmediate = false;
         result = truncateAt(',');
-      } else if (cmd.substring(0, 1).equals("0x")) {
+      } else if ((cmd.length() > 2) && cmd.substring(0, 2).equals("0x")) {
         isImmediate = true;
         cmd = cmd.substring(2, cmd.length());
-        immediate = Integer.parseInt(cmd);
+        immediate = Integer.parseInt(cmd, 16);
       } else {
         isImmediate = true;
         immediate = Integer.parseInt(cmd);
@@ -59,7 +59,7 @@ public class RISCInstruction {
   private String truncateAt(char cha) {
     if (cmd.length() > 1) {
       int index = cmd.indexOf(cha);
-      String result = "";
+      String result;
       if (index > 0) {
         result = cmd.substring(0, index);
         result = result.trim();
@@ -74,7 +74,7 @@ public class RISCInstruction {
 
   public void exeCmd() {
     try {
-      Class cls = Class.forName(getClassName());
+      Class<?> cls = Class.forName(getClassName());
       Method meth = cls.getMethod(methodName, this.getClass());
       meth.invoke(cls.newInstance(), this);
     } catch (NoSuchMethodException e) {
