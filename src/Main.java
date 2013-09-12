@@ -10,6 +10,8 @@ public class Main {
     String fileName = takeArguments(args);
     Program p = new Program(fileName);
 
+    RISCInstruction rs = p.getNextCommand();
+    if (rs.isLabel()) System.out.println(rs.getLabel());
     p.getNextCommand().exeCmd();
     p.getNextCommand().exeCmd();
     p.getNextCommand().exeCmd();
@@ -21,7 +23,7 @@ public class Main {
     if (args.length > 0) {
       if (args.length > 1) {
         Debug.startDebugging(args[1]);
-      } 
+      }
       return args[0];
     } else {
       Debug.forceQuit("The File name is missing we need atleast one file name to start with");

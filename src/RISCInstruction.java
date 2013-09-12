@@ -26,21 +26,30 @@ public class RISCInstruction {
 
   //public functions ......
   public void exeCmd() {
-    try {
-      Class<?> cls = Class.forName(getClassName());
-      Method meth = cls.getMethod(methodName, this.getClass());
-      meth.invoke(cls.newInstance(), this);
-    } catch (NoSuchMethodException e) {
-      Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
-    } catch (IllegalAccessException e) {
-      Debug.forceQuit("NEVER REACHING:: class illegally reached " + getClassName());
-    } catch (InstantiationException e) {
-      Debug.forceQuit("NEVER REACHING:: instantiateion failed " + getClassName());
-    } catch (InvocationTargetException e) {
-      Debug.forceQuit("NEVER REACHING:: invocation failed " + getClassName());
-    } catch (ClassNotFoundException e) {
-      Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
+    if (isLabel()) {
+      Debug.write("you are trying to compile a label instruction");
+    } else {
+      try {
+        Class<?> cls = Class.forName(getClassName());
+        Method meth = cls.getMethod(methodName, this.getClass());
+        meth.invoke(cls.newInstance(), this);
+      } catch (NoSuchMethodException e) {
+        Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
+      } catch (IllegalAccessException e) {
+        Debug.forceQuit("NEVER REACHING:: class illegally reached " + getClassName());
+      } catch (InstantiationException e) {
+        Debug.forceQuit("NEVER REACHING:: instantiateion failed " + getClassName());
+      } catch (InvocationTargetException e) {
+        Debug.forceQuit("NEVER REACHING:: invocation failed " + getClassName());
+      } catch (ClassNotFoundException e) {
+        Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
+      }
     }
+  }
+
+  public boolean isLabel() {
+    if (label.length() > 1) return true;
+    else return false;
   }
 
   //private functions for internal use ........
@@ -55,11 +64,6 @@ public class RISCInstruction {
         args3 = pullArgAfter2();
       else args3 = "";
     }
-  }
-
-  private boolean isLabel() {
-    if (label.length() > 1) return true;
-    else return false;
   }
 
   private void checkForLabel() {
@@ -104,9 +108,9 @@ public class RISCInstruction {
         break;
       case ':':
         label = cmd.substring(0, cmd.length() - 1);
+        label = label.replaceAll("\\s+", "");
       default:
         modifier = 0;
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> its nothing bitches");
     }
     cmd = cmd.substring(0, cmd.length() - 1);
   }
@@ -150,6 +154,12 @@ public class RISCInstruction {
 
   public int getImmediate() {
     return immediate;
+  }
+
+  public String getLabel() {
+    if (isLabel()) return label;
+    else return "";
+
   }
 
   public String getArg2() {
