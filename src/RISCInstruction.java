@@ -12,6 +12,7 @@ public class RISCInstruction {
   private int immediate;
   private final String methodName = "exeCmd";
   private short modifier;
+  private String label;
 
 
   // Constructors.........
@@ -44,12 +45,25 @@ public class RISCInstruction {
 
   //private functions for internal use ........
   private void populateValues() {
-    getInstruction();
-    pullArgs1();
-    args2 = pullArgAfter2();
-    if (!isImmediate)
-      args3 = pullArgAfter2();
-    else args3 = "";
+    label = "";
+    assignModifier();
+    if (!isLabel()) {
+      getInstruction();
+      pullArgs1();
+      args2 = pullArgAfter2();
+      if (!isImmediate)
+        args3 = pullArgAfter2();
+      else args3 = "";
+    }
+  }
+
+  private boolean isLabel() {
+    if (label.length() > 1) return true;
+    else return false;
+  }
+
+  private void checkForLabel() {
+    cmd = cmd.trim();
   }
 
   private String pullArgAfter2() {
@@ -88,6 +102,8 @@ public class RISCInstruction {
       case 'h':
         modifier = 2;
         break;
+      case ':':
+        label = cmd.substring(0, cmd.length() - 1);
       default:
         modifier = 0;
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> its nothing bitches");

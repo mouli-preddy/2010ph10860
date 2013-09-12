@@ -6,7 +6,8 @@
  */
 public class test {
   public static void main(String ar[]) {
-    String test = "movu";
-    System.out.println("The string added is " + test.substring(0, test.length() - 1));
+    String test = "";
+    if (test.length() > 1)
+      System.out.println("The string added is ");
   }
 }
