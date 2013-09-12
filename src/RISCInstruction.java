@@ -37,7 +37,7 @@ public class RISCInstruction {
         result = truncateAt(',');
       } else if ((cmd.length() > 2) && cmd.substring(0, 2).equals("0x")) {
         isImmediate = true;
-        cmd = cmd.substring(2, cmd.length());
+        cmd = cmd.substring(2, cmd.length()).replaceAll("\\s+", "");
         immediate = Integer.parseInt(cmd, 16);
       } else {
         isImmediate = true;
