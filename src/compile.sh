@@ -1,3 +1,3 @@
 rm -rf *.class
-javac Main.java
+javac *.java
 java Main sample.risc debug

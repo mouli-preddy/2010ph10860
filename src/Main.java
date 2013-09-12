@@ -13,6 +13,7 @@ public class Main {
     p.getNextCommand().exeCmd();
     p.getNextCommand().exeCmd();
     p.getNextCommand().exeCmd();
+    p.getNextCommand().exeCmd();
   }
 
   private static String takeArguments(String[] args) {
