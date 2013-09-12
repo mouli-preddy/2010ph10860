@@ -24,4 +24,12 @@ public class Debug {
     System.out.println(message);
     System.exit(1);
   }
+
+  public static void completed(String name) {
+    write("                                                         Completed>>" + name);
+  }
+
+  public static void command(String commandRead) {
+    write("                                                         Reading>>" + commandRead);
+  }
 }

@@ -8,6 +8,9 @@ public class CMDS_MOV extends RISCInstruction {
 
   public void exeCmd(RISCInstruction risc) {
     if (risc.isImmediate()) super.pushImmediate(risc.getArg1(), risc.getImmediate());
-    else super.assign(risc.getArg1(), risc.getArg2());
+    else {
+      super.assign(risc.getArg1(), risc.getArg2());
+    }
+    Debug.completed("mov");
   }
 }
