@@ -8,6 +8,7 @@ public class Register {
   private static int[] register;
   public static boolean e;
   public static boolean gt;
+  public static String errorMessage;
 
   //public classes
   public static void Initiate() {
@@ -15,6 +16,7 @@ public class Register {
     for (int i = 0; i < register.length; i++) {
       register[i] = 0;
     }
+    errorMessage = "";
   }
 
   //private classes
@@ -32,5 +34,22 @@ public class Register {
       Debug.write("There is a number format error occuring here");
     }
     return result;
+  }
+
+  public boolean set(String regI, int value) {
+    int index = getIndex(regI);
+    if (index >= 0) {
+      register[index] = value;
+      return true;
+    } else return false;
+  }
+
+  public int get(String regI) {
+    int index = getIndex(regI);
+    if (index >= 0) return register[index];
+    else {
+      Debug.write("The register >>" + regI + "<< is not valid");
+      return 0;
+    }
   }
 }
