@@ -11,7 +11,7 @@ public class Register {
   public static String errorMessage;
 
   //public classes
-  public static void Initiate() {
+  public Register() {
     register = new int[16];
     for (int i = 0; i < register.length; i++) {
       register[i] = 0;

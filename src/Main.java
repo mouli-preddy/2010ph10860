@@ -6,9 +6,12 @@
  */
 
 public class Main {
+
+  public static Register register;
+
   public static void main(String args[]) {
     String fileName = takeArguments(args);
-    Register.Initiate();
+    register = new Register();
     Program p = new Program(fileName);
 
     RISCInstruction rs = p.getNextCommand();

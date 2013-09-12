@@ -167,10 +167,11 @@ public class RISCInstruction {
   }
 
   public void pushImmediate(String regI, int imm) {
-    //@TODO
+    Main.register.set(regI, imm);
   }
 
   public void assign(String reg1, String reg2) {
-    //@TODO
+    int valueAt_reg2 = Main.register.get(reg2);
+    pushImmediate(reg1, valueAt_reg2);
   }
 }
