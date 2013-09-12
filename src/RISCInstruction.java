@@ -40,7 +40,7 @@ public class RISCInstruction {
       } catch (InstantiationException e) {
         Debug.forceQuit("NEVER REACHING:: instantiateion failed " + getClassName());
       } catch (InvocationTargetException e) {
-        Debug.forceQuit("NEVER REACHING:: invocation failed " + getClassName());
+        Debug.write("NEVER REACHING:: invocation failed " + getClassName());
       } catch (ClassNotFoundException e) {
         Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
       }
@@ -55,14 +55,16 @@ public class RISCInstruction {
   //private functions for internal use ........
   private void populateValues() {
     label = "";
-    assignModifier();
     if (!isLabel()) {
       getInstruction();
+      assignModifier();
       pullArgs1();
       args2 = pullArgAfter2();
-      if (!isImmediate)
+      if (!isImmediate) {
         args3 = pullArgAfter2();
-      else args3 = "";
+      } else {
+        args3 = "";
+      }
     }
   }
 
@@ -95,25 +97,26 @@ public class RISCInstruction {
   private void getInstruction() {
     cmd = cmd.trim();
     Instruction = truncateAt(' ');
-    Instruction = Instruction.replaceAll(".", "");
+    Instruction = Instruction.replaceAll("\\.", "");
     assignModifier();
   }
 
   private void assignModifier() {
-    switch (cmd.charAt(cmd.length() - 1)) {
+    switch (Instruction.charAt(Instruction.length() - 1)) {
       case 'u':
         modifier = 1;
+        Instruction = Instruction.substring(0, Instruction.length() - 1);
         break;
       case 'h':
         modifier = 2;
+        Instruction = Instruction.substring(0, Instruction.length() - 1);
         break;
       case ':':
-        label = cmd.substring(0, cmd.length() - 1);
-        label = label.replaceAll("\\s+", "");
+        label = Instruction.substring(0, Instruction.length() - 1);
+        label = label.trim();
       default:
         modifier = 0;
     }
-    cmd = cmd.substring(0, cmd.length() - 1);
   }
 
   private String truncateAt(char cha) {
