@@ -21,7 +21,7 @@ public class Debug {
   }
 
   public static void forceQuit(String message) {
-    System.out.println(message);
+    forceWrite(message);
     System.exit(1);
   }
 

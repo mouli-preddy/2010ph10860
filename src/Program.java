@@ -1,7 +1,6 @@
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -13,12 +12,11 @@ import java.util.Scanner;
 
 public class Program {
 
-  private static Scanner fileSc;
+  private static RandomAccessFile fileSc;
 
   public Program(String fileName) {
     try {
-      FileInputStream fs = new FileInputStream(fileName);
-      fileSc = new Scanner(fs);
+      fileSc = new RandomAccessFile(fileName, "r");
     } catch (FileNotFoundException e) {
       Debug.forceQuit("The file you gave me is not found");
     }
@@ -31,21 +29,17 @@ public class Program {
         result = nextLine();
       }
       return result;
-    } catch (EOFException e) {
-      Debug.write("EOF reached in the given file");
-      return null;
-    } catch (NoSuchElementException e) {
-      Debug.write("EOF reached in the given file");
+    } catch (Exception e) {
+      Debug.write("-----------------------------EOF reached in the given file------------------------------");
       return null;
     }
   }
 
-  private static String nextLine() throws EOFException {
-    if (fileSc.hasNextLine()) {
-      String result = fileSc.nextLine();
-      result = result.trim();
-      return result;
-    } else return null;
+  private static String nextLine() throws IOException {
+    String result = null;
+    result = fileSc.readLine();
+    result = result.trim();
+    return result;
   }
 
   public RISCInstruction getNextCommand() {
