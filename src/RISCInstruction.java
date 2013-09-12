@@ -165,4 +165,12 @@ public class RISCInstruction {
   public String getArg2() {
     return args2;
   }
+
+  public void pushImmediate(String regI, int imm) {
+    //@TODO
+  }
+
+  public void assign(String reg1, String reg2) {
+    //@TODO
+  }
 }
