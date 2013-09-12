@@ -13,6 +13,8 @@ public class RISCInstruction {
   private final String methodName = "exeCmd";
   private short modifier;
 
+
+  // Constructors.........
   public RISCInstruction() {
   }
 
@@ -21,6 +23,26 @@ public class RISCInstruction {
     populateValues();
   }
 
+  //public functions ......
+  public void exeCmd() {
+    try {
+      Class<?> cls = Class.forName(getClassName());
+      Method meth = cls.getMethod(methodName, this.getClass());
+      meth.invoke(cls.newInstance(), this);
+    } catch (NoSuchMethodException e) {
+      Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
+    } catch (IllegalAccessException e) {
+      Debug.forceQuit("NEVER REACHING:: class illegally reached " + getClassName());
+    } catch (InstantiationException e) {
+      Debug.forceQuit("NEVER REACHING:: instantiateion failed " + getClassName());
+    } catch (InvocationTargetException e) {
+      Debug.forceQuit("NEVER REACHING:: invocation failed " + getClassName());
+    } catch (ClassNotFoundException e) {
+      Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
+    }
+  }
+
+  //private functions for internal use ........
   private void populateValues() {
     getInstruction();
     pullArgs1();
@@ -89,30 +111,13 @@ public class RISCInstruction {
     } else return "";
   }
 
-  public void exeCmd() {
-    try {
-      Class<?> cls = Class.forName(getClassName());
-      Method meth = cls.getMethod(methodName, this.getClass());
-      meth.invoke(cls.newInstance(), this);
-    } catch (NoSuchMethodException e) {
-      Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
-    } catch (IllegalAccessException e) {
-      Debug.forceQuit("NEVER REACHING:: class illegally reached " + getClassName());
-    } catch (InstantiationException e) {
-      Debug.forceQuit("NEVER REACHING:: instantiateion failed " + getClassName());
-    } catch (InvocationTargetException e) {
-      Debug.forceQuit("NEVER REACHING:: invocation failed " + getClassName());
-    } catch (ClassNotFoundException e) {
-      Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
-    }
-  }
-
-  public short getModifier() {
-    return modifier;
-  }
-
   private String getClassName() {
     return "CMDS_" + Instruction.toUpperCase();
+  }
+
+  //accessor functions
+  public short getModifier() {
+    return modifier;
   }
 
   public String getArgs3() {
