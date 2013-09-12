@@ -35,3 +35,12 @@ public class Main {
     return "";
   }
 }
+
+
+// pattern for CMDS_**** instucrion executer...
+//
+//public class CMDS_PRINT extends RISCInstruction {
+//  public static void exeCmd(RISCInstruction risc) {
+//
+//  }
+//}
