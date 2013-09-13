@@ -1,11 +1,11 @@
 mov r0, 0x123f
 mov r1, 0xfead
-movu r2, r1
-movu r3, r0
-movh r4, r1
+movu r2, 0xfead
+movu r3, 0x123f
+movh r4, 0xfead
 
 
-movh r5, r0
+movh r5, 0x123f
 
 .print r0
 .print   r1
