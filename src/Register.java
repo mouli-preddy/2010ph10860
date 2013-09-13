@@ -44,6 +44,22 @@ public class Register {
     } else return false;
   }
 
+  public void setEQ() {
+    e = true;
+  }
+
+  public void resetEQ() {
+    e = false;
+  }
+
+  public void setGT() {
+    gt = true;
+  }
+
+  public void resetGT() {
+    gt = false;
+  }
+
   public int get(String regI) {
     int index = getIndex(regI);
     if (index >= 0 && index < 16) return register[index];
