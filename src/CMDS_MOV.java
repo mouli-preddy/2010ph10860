@@ -13,7 +13,6 @@ public class CMDS_MOV extends RISCInstruction {
       int immed = Main.register.get(risc.getArg2());
       super.pushImmediate(risc.getArg1(), getInput(immed, risc.getModifier()));
     }
-    Debug.completed("mov");
   }
 
   private int getInput(int imme, short mod) {

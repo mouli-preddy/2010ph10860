@@ -33,6 +33,7 @@ public class RISCInstruction {
         Class<?> cls = Class.forName(getClassName());
         Method meth = cls.getMethod(methodName, this.getClass());
         meth.invoke(cls.newInstance(), this);
+        Debug.completed(Instruction);
       } catch (NoSuchMethodException e) {
         Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
       } catch (IllegalAccessException e) {
