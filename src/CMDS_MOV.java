@@ -12,7 +12,6 @@ public class CMDS_MOV extends RISCInstruction {
       risc.pushImmediate(risc.getArg1(), immed);
     } else {
       int immed = Main.register.get(risc.getArg2());
-      immed = risc.getModifiedImm(immed);
       risc.pushImmediate(risc.getArg1(), immed);
     }
   }
