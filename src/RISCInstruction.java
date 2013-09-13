@@ -25,7 +25,7 @@ public class RISCInstruction {
   }
 
   //public functions ......
-  public void exeCmd() {
+  public void exeCommand() {
     if (isLabel()) {
       Debug.write("you are trying to compile a label instruction");
     } else {

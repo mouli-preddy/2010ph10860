@@ -16,7 +16,7 @@ public class Main {
 
     RISCInstruction rs = p.getNextCommand();
     while (rs != null) {
-      rs.exeCmd();
+      rs.exeCommand();
       rs = p.getNextCommand();
     }
   }
