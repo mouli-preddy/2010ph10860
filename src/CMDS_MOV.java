@@ -20,11 +20,15 @@ public class CMDS_MOV extends RISCInstruction {
     int result = 0;
     switch (mod) {
       case 0:
-        break;
+        return immediate;
+      break;
       case 1:
+        if (immediate < 0) return (immediate - 0xffff0000);
+        else return immediate;
         break;
       case 2:
-        break;
+        return immediate * 0x10000;
+      break;
     }
     return result;
   }
