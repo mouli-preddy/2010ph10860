@@ -24,15 +24,15 @@ public class Program {
 
   private String nextCommandStr() {
     String result = "";
-    try {
-      while (result == "") {
+    while (result.length() == 0) {
+      try {
         result = nextLine();
+      } catch (Exception e) {
+        Debug.write("-----------------------------EOF reached in the given file------------------------------");
+        return null;
       }
-      return result;
-    } catch (Exception e) {
-      Debug.write("-----------------------------EOF reached in the given file------------------------------");
-      return null;
     }
+    return result;
   }
 
   private String nextLine() throws IOException {
