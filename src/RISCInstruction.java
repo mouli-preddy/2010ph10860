@@ -53,10 +53,10 @@ public class RISCInstruction {
     else return false;
   }
 
-  protected int getModifiedImm(int imme, short mod) {
+  protected int getModifiedImm(int imme) {
     short immediate = (short) imme;
     int result = 0;
-    switch (mod) {
+    switch (modifier) {
       case 0:
         result = immediate;
         break;
