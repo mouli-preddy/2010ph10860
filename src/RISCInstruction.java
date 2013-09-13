@@ -53,6 +53,23 @@ public class RISCInstruction {
     else return false;
   }
 
+  protected int getModifiedImm(int imme, short mod) {
+    short immediate = (short) imme;
+    int result = 0;
+    switch (mod) {
+      case 0:
+        result = immediate;
+        break;
+      case 1:
+        if (immediate < 0) result = (immediate - 0xffff0000);
+        else result = immediate;
+        break;
+      case 2:
+        result = immediate * 0x10000;
+    }
+    return result;
+  }
+
   //private functions for internal use ........
   private void populateValues() {
     label = "";
