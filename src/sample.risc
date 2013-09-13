@@ -1,10 +1,15 @@
-mov r0,3
-mov r1,r0
-mov r5, 0x123F
-mov r9 ,-123
+mov r0, 0x123f
+mov r1, 0xfead
+movu r2, r1
+movu r3, r0
+movh r4, r1
+
+
+movh r5, r0
+
 .print r0
 .print   r1
-.print  r5
-.print r9
-mov r0, 0x 12 12
-.print r0
+.print  r2
+.print r3
+.print r4
+.print r5

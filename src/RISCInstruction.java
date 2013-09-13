@@ -98,7 +98,6 @@ public class RISCInstruction {
     cmd = cmd.trim();
     Instruction = truncateAt(' ');
     Instruction = Instruction.replaceAll("\\.", "");
-    assignModifier();
   }
 
   private void assignModifier() {
