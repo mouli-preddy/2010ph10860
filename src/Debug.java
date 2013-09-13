@@ -32,4 +32,8 @@ public class Debug {
   public static void command(String commandRead) {
     write("                                                         Reading>>" + commandRead);
   }
+
+  public static void forceWrite(int i) {
+    forceWrite(Integer.toString(i));
+  }
 }

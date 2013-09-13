@@ -16,7 +16,8 @@ public class CMDS_MOV extends RISCInstruction {
     Debug.completed("mov");
   }
 
-  private int getInput(int immediate, short mod) {
+  private int getInput(int imme, short mod) {
+    short immediate = (short) imme;
     int result = 0;
     switch (mod) {
       case 0:
