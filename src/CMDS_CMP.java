@@ -9,7 +9,7 @@ public class CMDS_CMP extends RISCInstruction {
   public static void exeCmd(RISCInstruction risc) {
     int immediateLEFT = Main.register.get(risc.getArg1());
     int immediateRIGHT;
-    immediateRIGHT = risc.getProperImm();
+    immediateRIGHT = risc.getProperImm(2);
     if (immediateLEFT == immediateRIGHT) {
       Main.register.setEQ();
       Main.register.resetGT();

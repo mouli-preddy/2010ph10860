@@ -7,7 +7,7 @@
 public class CMDS_MOV extends RISCInstruction {
 
   public void exeCmd(RISCInstruction risc) {
-    int immed = risc.getProperImm();
+    int immed = risc.getProperImm(2);
     risc.pushImmediate(risc.getArg1(), immed);
   }
 }

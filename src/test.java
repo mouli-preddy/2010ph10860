@@ -8,5 +8,7 @@ import java.util.Scanner;
  */
 public class test {
   public static void main(String[] a) {
+    int one = 0x7fffffff + 0x7fffffff;
+    System.out.println(Integer.toHexString(one));
   }
 }

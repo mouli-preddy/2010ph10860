@@ -53,13 +53,13 @@ public class RISCInstruction {
     else return false;
   }
 
-  protected int getProperImm() {
+  protected int getProperImm(int pos) {
     int immediateRIGHT;
     if (isImmediate()) {
       immediateRIGHT = getModifiedImm(getImmediate());
-    } else {
+    } else if (pos == 2) {
       immediateRIGHT = Main.register.get(getArg2());
-    }
+    } else immediateRIGHT = Main.register.get(getArgs3());
     return immediateRIGHT;
   }
 
