@@ -1,7 +1,7 @@
 mov r0, 456
 mov r1, 123
-add r2, r1, 321
-add r3, r0, r1
+sub r2, r1, 321
+sub r3, r0, r1
 
 .print r0
 .print r1
