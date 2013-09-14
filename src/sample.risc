@@ -1,7 +1,7 @@
-mov r0, 256
-mov r1, 16
-mod r2, r0, r1
-mod r3, r1, 6
+mov r0, 60
+mov r1, 13
+or r2, r0, r1
+and r3, r0, r1
 
 .print r0
 .print r1
