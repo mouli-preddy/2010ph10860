@@ -23,11 +23,11 @@ public class test {
 
 
   public static void main(String[] a) {
-    String str = "   sample:    movh        r2 , 543[r5], ";
+    String str = "add r1, 0x12[r3]";
     args1 = null;
     args2 = null;
     args3 = null;
-    System.out.println("String received = " + str);
+    System.out.println("/////////////////////////////////////////////String received = " + str);
     StringTokenizer st = new StringTokenizer(str, " [],\n\t");
     input = new Vector<String>();
     while (st.hasMoreTokens()) {
@@ -36,6 +36,7 @@ public class test {
     populateValues();
     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>label=" + label);
     System.out.println(">>>>>>>>>>>>>>>>>>>>>> instruction=" + Instruction);
+    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=modifier=" + modifier);
     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=args1=" + args1);
     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=args2=" + args2);
     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=args3=" + args3);
@@ -44,7 +45,6 @@ public class test {
 
   private static void populateValues() {
     int index = 0;
-    System.out.println("tokens remaining " + input.size());
     while (input.size() > 0) {
       switch (index) {
         case 0:
@@ -70,15 +70,15 @@ public class test {
         default:
           return;
       }
-      System.out.println("tokens remaining " + input.size());
     }
   }
 
   private static boolean getAddress() {
+
     String sample = input.elementAt(0);
     if (sample.charAt(0) == 'r') {
       putArgument(sample);
-    } else if (sample.substring(0, 1).equals("0x")) {
+    } else if (sample.substring(0, 2).equals("0x")) {
       putHexImmed(sample);
     } else {
       putDecImmed(sample);
@@ -88,13 +88,12 @@ public class test {
 
   private static boolean putDecImmed(String sample) {
     immediate = Integer.parseInt(sample);
-    System.out.println("A dec immediate is obtained is ............................." + immediate);
     isImmediate = true;
     return true;
   }
 
   private static boolean putHexImmed(String sample) {
-    sample = sample.substring(2, sample.length() - 1);
+    sample = sample.substring(2, sample.length());
     isImmediate = true;
     immediate = Integer.parseInt(sample, 16);
     return true;
