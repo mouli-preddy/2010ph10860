@@ -1,7 +1,7 @@
 mov r0, 256
 mov r1, 16
-mul r2, r0, r1
-mul r3, r1, 6
+mod r2, r0, r1
+mod r3, r1, 6
 
 .print r0
 .print r1
