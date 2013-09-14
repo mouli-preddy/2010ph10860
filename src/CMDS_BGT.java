@@ -5,7 +5,7 @@
  * Submission date: 15th September, 2013
  */
 public class CMDS_BGT extends RISCInstruction {
-public static void exeCmd(RISCInstruction risc) {
+  public static void exeCmd(RISCInstruction risc) {
 //  @TODO
-    }
-    }
+  }
+}
