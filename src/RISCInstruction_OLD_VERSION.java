@@ -3,7 +3,7 @@ import java.lang.reflect.Method;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-public class RISCInstruction {
+public class RISCInstruction_OLD_VERSION {
 
   private String cmd;
   private String args1;
@@ -19,16 +19,28 @@ public class RISCInstruction {
   private Vector<String> input;
 
   // Constructors.........
-  public RISCInstruction() {
+  public RISCInstruction_OLD_VERSION() {
   }
 
-  public RISCInstruction(String command) {
+  public RISCInstruction_OLD_VERSION(String command) {
     StringTokenizer st = new StringTokenizer(command, " [],\n\t");
     input = new Vector<String>();
     while (st.hasMoreTokens()) {
       input.add(st.nextToken());
     }
     populateValues();
+
+
+//    testing
+//    System.out.println("/////////////////////////////////////////////String received = " + command);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>label=" + label);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>> instruction=" + Instruction);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=modifier=" + modifier);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=args1=" + args1);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=args2=" + args2);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>=args3=" + args3);
+//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>immedi=" + immediate);
+
   }
 
   private void populateValues() {
