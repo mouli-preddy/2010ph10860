@@ -13,22 +13,29 @@ public class Label {
 
   public Label(Program p) {
     startPos = p.getFilePointer();
-    storeAllLabels(p);
     labelMap = new HashMap<String, Integer>();
+    storeAllLabels(p);
   }
 
   private void storeAllLabels(Program p) {
     RISCInstruction rs = p.getNextCommand();
     while (rs != null) {
-      if (rs.getLabel() != null) {
+      if (rs.isHasLabel()) {
         int pos = (int) (p.getFilePointer() - startPos);
         labelMap.put(rs.getLabel(), pos);
+        System.out.println(rs.getLabel() + "   added with  " + pos);
       }
       rs = p.getNextCommand();
     }
   }
 
   public long findLabel(String label) {
-    return labelMap.get(label);
+    try {
+      return labelMap.get(label);
+    } catch (Exception e) {
+      Debug.forceQuit("The label " + label + " is not defined");
+      e.printStackTrace();
+    }
+    return 0;
   }
 }
