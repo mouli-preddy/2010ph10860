@@ -10,13 +10,14 @@ public class Main {
   public static Register register;
   public static Stack stack;
   public static Label labels;
+  public static Program p;
 
   public static void main(String args[]) {
     String fileName = takeArguments(args);
     register = new Register();
     stack = new Stack();
 
-    Program p = new Program(fileName);
+    p = new Program(fileName);
     long startPos = p.getFilePointer();
     labels = new Label(p);
     p.setPointer(startPos);

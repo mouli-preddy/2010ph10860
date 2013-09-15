@@ -6,6 +6,13 @@
  */
 public class CMDS_CALL extends RISCInstruction {
   public static void exeCmd(RISCInstruction risc) {
-//  @TODO
+    //Accessing the next command in line and stores in ra
+    Main.p.getNextCommand();
+    int ra = (int) Main.p.getFilePointer();
+    risc.pushImmediate("ra", ra);
+
+    //Changing stack pointer to the address of label in file...
+    int spNew = (int) Main.labels.findLabel(risc.getLabel());
+    Main.p.setPointer(spNew);
   }
 }
