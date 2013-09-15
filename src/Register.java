@@ -61,6 +61,8 @@ public class Register {
   }
 
   public int get(String regI) {
+    regI = regI.replace("sp", "r14");
+    regI = regI.replace("ra", "r15");
     int index = getIndex(regI);
     if (index >= 0 && index < 16) return register[index];
     else {
