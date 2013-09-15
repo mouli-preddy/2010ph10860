@@ -7,7 +7,7 @@
 public class CMDS_NOT extends RISCInstruction {
 
   public static void exeCmd(RISCInstruction risc) {
-    int imme = risc.getProperImm(3);
+    int imme = risc.getProperImm(2);
     risc.pushImmediate(risc.getArg1(), ~imme);
   }
 }
