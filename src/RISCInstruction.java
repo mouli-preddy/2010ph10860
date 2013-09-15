@@ -182,6 +182,8 @@ public class RISCInstruction {
   private boolean isBranchOp() {
     String sample = input.elementAt(0);
     boolean isRegister = sample.replaceAll("\\d*$", "").equals("r");
+    isRegister = isRegister || sample.equals("sp");
+    isRegister = isRegister || sample.equals("ra");
     if (!isRegister) {
       putLabel(false);
       return true;
@@ -195,7 +197,7 @@ public class RISCInstruction {
   private boolean getAddress() {
     String sample = input.elementAt(0);
     // if the argument is of the form rd
-    if (sample.charAt(0) == 'r') {
+    if (sample.charAt(0) == 'r' || sample.charAt(0) == 's') {
       putArgument(sample);
 
       //    If the argument is of the form 0xnnnn

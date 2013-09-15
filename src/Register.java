@@ -70,13 +70,16 @@ public class Register {
   }
 
   public int get(String regI) {
-    regI = regI.replace("sp", "r14");
-    regI = regI.replace("ra", "r15");
-    int index = getIndex(regI);
-    if (index >= 0 && index < 16) return register[index];
+    System.out.println("Register requesting is " + regI);
+    if (regI.equals("sp")) return register[14];
+    else if (regI.equals("ra")) return register[15];
     else {
-      Debug.write("The register >>" + regI + "<< is not valid");
-      return 0;
+      int index = getIndex(regI);
+      if (index >= 0 && index < 16) return register[index];
+      else {
+        Debug.write("The register >>" + regI + "<< is not valid");
+        return 0;
+      }
     }
   }
 }
