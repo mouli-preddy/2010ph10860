@@ -21,4 +21,12 @@ public class Stack {
       return value;
     } else return 1;
   }
+
+  public int getValueAt(int address) {
+    return stack[address];
+  }
+
+  public int setValueAt(int address, int value) {
+    return stack[address] = value;
+  }
 }
