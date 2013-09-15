@@ -13,6 +13,7 @@ public class RISCInstruction {
   private int immediate;
   private final String methodName = "exeCmd";
   private short modifier;
+  private boolean hasLabel;
   private String label;
 
   private Vector<String> input;
@@ -71,21 +72,25 @@ public class RISCInstruction {
    * quits the program when any kind of error is encountered ...
    */
   public void exeCommand() {
-    try {
-      Class<?> cls = Class.forName(getClassName());
-      Method meth = cls.getMethod(methodName, this.getClass());
-      meth.invoke(cls.newInstance(), this);
-      Debug.completed(Instruction);
-    } catch (NoSuchMethodException e) {
-      Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
-    } catch (IllegalAccessException e) {
-      Debug.forceQuit("NEVER REACHING:: class illegally reached " + getClassName());
-    } catch (InstantiationException e) {
-      Debug.forceQuit("NEVER REACHING:: instantiation failed " + getClassName());
-    } catch (InvocationTargetException e) {
-      Debug.write("NEVER REACHING:: invocation failed " + getClassName());
-    } catch (ClassNotFoundException e) {
-      Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
+    if (Instruction != null) {
+      try {
+        Class<?> cls = Class.forName(getClassName());
+        Method meth = cls.getMethod(methodName, this.getClass());
+        meth.invoke(cls.newInstance(), this);
+        Debug.completed(Instruction);
+      } catch (NoSuchMethodException e) {
+        Debug.forceQuit("NEVER REACHING:: method not found" + getClassName());
+      } catch (IllegalAccessException e) {
+        Debug.forceQuit("NEVER REACHING:: class illegally reached " + getClassName());
+      } catch (InstantiationException e) {
+        Debug.forceQuit("NEVER REACHING:: instantiation failed " + getClassName());
+      } catch (InvocationTargetException e) {
+        Debug.write("NEVER REACHING:: invocation failed " + getClassName());
+      } catch (ClassNotFoundException e) {
+        Debug.forceQuit("NEVER REACHING:: class is not found " + getClassName());
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -142,7 +147,8 @@ public class RISCInstruction {
     while (input.size() > 0) {
       switch (index) {
         case 0:
-          if (putLabel()) input.remove(0);
+          hasLabel = false;
+          if (putLabel(true)) input.remove(0);
           index++;
           break;
         case 1:
@@ -150,7 +156,7 @@ public class RISCInstruction {
           index++;
           break;
         case 2:
-          if (getAddress()) input.remove(0);
+          if (isBranchOp() || getAddress()) input.remove(0);
           index++;
           break;
         case 3:
@@ -167,6 +173,16 @@ public class RISCInstruction {
     }
   }
 
+  private boolean isBranchOp() {
+    String sample = input.elementAt(0);
+    boolean isRegister = sample.replaceAll("\\d*$", "").equals("r");
+    if (!isRegister) {
+      putLabel(false);
+      return true;
+    }
+    return false;
+  }
+
   /**
    * @return true if the address is read from
    */
@@ -181,7 +197,7 @@ public class RISCInstruction {
       putHexImmed(sample);
 
       //    If nothing else works go for dec format numbers...
-    } else {
+    } else if (sample.charAt(0) != '.') {
       putDecImmed(sample);
     }
     return true;
@@ -198,7 +214,7 @@ public class RISCInstruction {
       immediate = Integer.parseInt(sample);
       isImmediate = true;
     } catch (NumberFormatException e) {
-      Debug.write("number format exception reached");
+      Debug.write("number format exception reached for" + sample);
       return false;
     }
     return true;
@@ -214,11 +230,12 @@ public class RISCInstruction {
    */
   private boolean putHexImmed(String sample) {
     try {
-      if (sample.length() > 4) {
-        sample = sample.substring(2, sample.length());
-        if (sample.length() < 4) sample += input.elementAt(1);
-        if (sample.length() < 4) sample += input.elementAt(2);
+      int i = 1;
+      while (sample.length() < 6) {
+        sample += input.elementAt(i);
+        i++;
       }
+      sample = sample.substring(2, sample.length());
       immediate = Integer.parseInt(sample, 16);
       isImmediate = true;
     } catch (Exception e) {
@@ -288,10 +305,15 @@ public class RISCInstruction {
    *
    * @return true of label is found ...
    */
-  private boolean putLabel() {
+  private boolean putLabel(boolean hasColon) {
     String sample = input.elementAt(0);
-    if (sample.contains(":")) {
+    if (hasColon && sample.contains(":")) {
       label = sample.substring(0, sample.length() - 1).trim();
+      hasLabel = true;
+      return true;
+    } else if (!hasColon) {
+      label = sample.trim();
+      hasLabel = false;
       return true;
     }
     return false;
@@ -342,6 +364,10 @@ public class RISCInstruction {
    */
   public String getArg2() {
     return args2;
+  }
+
+  public boolean isHasLabel() {
+    return hasLabel;
   }
 
   /**
