@@ -2,7 +2,7 @@
   movu r0, 0x 32 42
   .print r1
   .print r0
-
+  ret
 .main:
   mov r1, 1234
   call .factorial

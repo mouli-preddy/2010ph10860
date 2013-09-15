@@ -6,6 +6,7 @@
  */
 public class CMDS_RET extends RISCInstruction {
   public static void exeCmd(RISCInstruction risc) {
-//  @TODO
+    int returnAdd = Main.register.get("ra");
+    Main.p.setPointer(returnAdd);
   }
 }
