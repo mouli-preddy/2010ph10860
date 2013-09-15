@@ -70,7 +70,6 @@ public class Register {
   }
 
   public int get(String regI) {
-    System.out.println("Register requesting is " + regI);
     if (regI.equals("sp")) return register[14];
     else if (regI.equals("ra")) return register[15];
     else {
