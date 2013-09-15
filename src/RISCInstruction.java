@@ -341,4 +341,12 @@ public class RISCInstruction {
   public String getArg2() {
     return args2;
   }
+
+  /**
+   * returns the label of this command if the label is not populated
+   * this returns a null;;;
+   */
+  public String getLabel() {
+    return label;
+  }
 }

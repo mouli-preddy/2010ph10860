@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Program {
 
   private RandomAccessFile fileSc;
+  private long pointer;
 
   public Program(String fileName) {
     try {
@@ -37,6 +38,11 @@ public class Program {
 
   private String nextLine() throws IOException {
     String result = null;
+    try {
+      pointer = fileSc.getFilePointer();
+    } catch (Exception e) {
+      Debug.forceQuit("NEVER REACHING:: the file pointer is not correct");
+    }
     result = fileSc.readLine();
     result = result.trim();
     return result;
@@ -53,12 +59,7 @@ public class Program {
   }
 
   public long getFilePointer() {
-    try {
-      return fileSc.getFilePointer();
-    } catch (Exception e) {
-      Debug.forceQuit("NEVER REACHING:: the file pointer is not correct");
-    }
-    return 0;
+    return pointer;
   }
 
   public void setPointer(long pointer) {
