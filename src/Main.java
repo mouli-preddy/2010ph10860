@@ -20,7 +20,8 @@ public class Main {
     p = new Program(fileName);
     long startPos = p.getFilePointer();
     labels = new Label(p);
-    p.setPointer(startPos);
+    Debug.write("The file is loaded and ready to execute");
+    p.setPointer(labels.findLabel(".main"));
 
     RISCInstruction rs = p.getNextCommand();
     while (rs != null) {
@@ -42,16 +43,3 @@ public class Main {
     return "";
   }
 }
-
-
-// pattern for CMDS_**** instucrion executer...
-//
-//public class CMDS_PRINT extends RISCInstruction {
-//  public static void exeCmd(RISCInstruction risc) {
-//
-//  }
-//}
-
-
-//pattern for random stack pointer
-//p.setPointer(pinter);
