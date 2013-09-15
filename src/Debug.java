@@ -30,7 +30,9 @@ public class Debug {
   }
 
   public static void command(String commandRead) {
-    write("                                                         Reading>>" + commandRead);
+    if (commandRead != null) {
+      write("                                                         Reading>>" + commandRead);
+    }
   }
 
   public static void forceWrite(int i) {
