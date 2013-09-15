@@ -5,7 +5,9 @@
  * Submission date: 15th September, 2013
  */
 public class CMDS_B extends RISCInstruction {
+
   public static void exeCmd(RISCInstruction risc) {
-//  @TODO
+    int spNew = (int) Main.labels.findLabel(risc.getLabel());
+    Main.p.setPointer(spNew);
   }
 }
