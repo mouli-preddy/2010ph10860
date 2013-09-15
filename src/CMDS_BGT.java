@@ -6,6 +6,9 @@
  */
 public class CMDS_BGT extends RISCInstruction {
   public static void exeCmd(RISCInstruction risc) {
-//  @TODO
+    if (Main.register.GT()) {
+      int spNew = (int) Main.labels.findLabel(risc.getLabel());
+      Main.p.setPointer(spNew);
+    }
   }
 }

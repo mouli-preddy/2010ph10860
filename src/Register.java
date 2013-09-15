@@ -60,6 +60,14 @@ public class Register {
     gt = false;
   }
 
+  public boolean E() {
+    return e;
+  }
+
+  public boolean GT() {
+    return gt;
+  }
+
   public int get(String regI) {
     regI = regI.replace("sp", "r14");
     regI = regI.replace("ra", "r15");
