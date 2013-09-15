@@ -48,6 +48,8 @@ public class RISCInstruction {
    * @param imm  the immediate that is pushed into @param regI
    */
   public void pushImmediate(String regI, int imm) {
+    regI = regI.replace("sp", "r14");
+    regI = regI.replace("ra", "r15");
     Main.register.set(regI, imm);
   }
 
