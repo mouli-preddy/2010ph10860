@@ -17,6 +17,7 @@ public class Register {
       register[i] = 0;
     }
     errorMessage = "";
+    set("sp", 0xfff);
   }
 
   //private classes
