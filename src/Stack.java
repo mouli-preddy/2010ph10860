@@ -15,18 +15,17 @@ public class Stack {
     pointer = 0xFFF;
   }
 
-  public int getPointer(int jump) {
-    int value = jump / 4;
-    if (value > 0) {
-      return value;
-    } else return 1;
+  private int getPointer(int jump) {
+    return jump / 4;
   }
 
   public int getValueAt(int address) {
+    address = getPointer(address);
     return stack[address];
   }
 
   public int setValueAt(int address, int value) {
+    address = getPointer(address);
     return stack[address] = value;
   }
 }
