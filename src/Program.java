@@ -14,6 +14,14 @@ public class Program {
   private RandomAccessFile fileSc;
   private long pointer;
 
+
+  /**
+   * Constructor to create a Program counter.
+   * keeps track of the file to be accessed and retrieves commands
+   * that are free from comments
+   *
+   * @param fileName the filename that is opened in read mode
+   */
   public Program(String fileName) {
     try {
       fileSc = new RandomAccessFile(fileName, "r");
@@ -36,13 +44,12 @@ public class Program {
   }
 
   private String nextLine() throws IOException {
-    String result = null;
     try {
       pointer = fileSc.getFilePointer();
     } catch (Exception e) {
       Debug.forceQuit("NEVER REACHING:: the file pointer is not correct");
     }
-    result = fileSc.readLine();
+    String result = fileSc.readLine();
     result = removeComments(result);
     return result;
   }
