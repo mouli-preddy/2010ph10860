@@ -7,7 +7,11 @@
 public class test {
 
   public static void main(String args[]) {
-    int sampel = 1;
-    System.out.println("int is " + Integer.toHexString(sampel) + " and its not is " + Integer.toHexString(~sampel));
+    String sample = "asdfasdfasdf /* commentf */";
+    sample = sample.replaceAll("/\\*(.|[\\r\\n])*?\\*/", "");
+    if (sample.indexOf("//") > 0) sample = sample.substring(0, sample.indexOf("//"));
+    if (sample.indexOf("@") > 0) sample = sample.substring(0, sample.indexOf("@"));
+    sample = sample.replaceAll("@", "");
+    System.out.println("string after removal=" + sample + "<<");
   }
 }

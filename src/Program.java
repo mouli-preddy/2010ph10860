@@ -1,7 +1,6 @@
-import java.io.*;
-import java.util.NoSuchElementException;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 /**
  * User: moulikrishna.
@@ -44,8 +43,18 @@ public class Program {
       Debug.forceQuit("NEVER REACHING:: the file pointer is not correct");
     }
     result = fileSc.readLine();
-    result = result.trim();
+    result = removeComments(result);
     return result;
+  }
+
+  private String removeComments(String sample) {
+    //takes care of /***/ formats.
+    sample = sample.replaceAll("/\\*(.|[\\r\\n])*?\\*/", "");
+    //takes care of //format
+    if (sample.indexOf("//") > 0) sample = sample.substring(0, sample.indexOf("//"));
+    //takes care of @format
+    if (sample.indexOf("@") > 0) sample = sample.substring(0, sample.indexOf("@"));
+    return sample.trim();
   }
 
   public RISCInstruction getNextCommand() {
