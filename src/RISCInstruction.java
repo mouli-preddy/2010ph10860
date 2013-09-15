@@ -15,6 +15,7 @@ public class RISCInstruction {
   private short modifier;
   private boolean hasLabel;
   private String label;
+  private boolean isRegisterIndirect;
 
   private Vector<String> input;
 
@@ -34,6 +35,7 @@ public class RISCInstruction {
    * @param command = The line of RISC code that is executable.
    */
   public RISCInstruction(String command) {
+    checkAddressMode(command);
     StringTokenizer st = new StringTokenizer(command, " [],\n\t");
     input = new Vector<String>();
     while (st.hasMoreTokens()) {
@@ -134,6 +136,12 @@ public class RISCInstruction {
   }
 
   //parsing helper functions ...
+
+  private void checkAddressMode(String command) {
+    boolean hasLeft = command.contains("[");
+    boolean hasRight = command.contains("]");
+    isRegisterIndirect = hasLeft && hasRight;
+  }
 
   /**
    * The first part of parser that actually tokenizes the string and
@@ -374,5 +382,9 @@ public class RISCInstruction {
    */
   public String getLabel() {
     return label;
+  }
+
+  public boolean isAddressMode() {
+    return isRegisterIndirect;
   }
 }
