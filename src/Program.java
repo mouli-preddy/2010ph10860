@@ -30,6 +30,23 @@ public class Program {
     }
   }
 
+  /**
+   * returns the constructed RISC COMMAND class that has all the values properly
+   * populated in it.
+   */
+  public RISCInstruction getNextCommand() {
+    String newLine = nextCommandStr();
+    Debug.command(newLine);
+    if (newLine == null) return null;
+    else {
+      RISCInstruction cmd = new RISCInstruction(newLine);
+      return cmd;
+    }
+  }
+
+  /**
+   * Returns the next String that has some code in it
+   */
   private String nextCommandStr() {
     String result = "";
     while (result.length() == 0) {
@@ -43,6 +60,10 @@ public class Program {
     return result;
   }
 
+  /**
+   * returns the next line in file irrespective on the content.
+   * also store the file pointer to the line that is read in a private variable...
+   */
   private String nextLine() throws IOException {
     try {
       pointer = fileSc.getFilePointer();
@@ -54,6 +75,10 @@ public class Program {
     return result;
   }
 
+  /**
+   * removes comments from the string param received of type
+   * "/*  * /", ""//" , "@"
+   */
   private String removeComments(String sample) {
     //takes care of /***/ formats.
     sample = sample.replaceAll("/\\*(.|[\\r\\n])*?\\*/", "");
@@ -64,20 +89,18 @@ public class Program {
     return sample.trim();
   }
 
-  public RISCInstruction getNextCommand() {
-    String newLine = nextCommandStr();
-    Debug.command(newLine);
-    if (newLine == null) return null;
-    else {
-      RISCInstruction cmd = new RISCInstruction(newLine);
-      return cmd;
-    }
-  }
+  //accessor funcitons for pointer.
 
+  /**
+   * getter for filepointer.
+   */
   public long getFilePointer() {
     return pointer;
   }
 
+  /**
+   * setter for the file pointer.
+   */
   public void setPointer(long pointer) {
     try {
       fileSc.seek(pointer);
