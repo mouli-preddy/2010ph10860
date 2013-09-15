@@ -23,7 +23,6 @@ public class Label {
       if (rs.isHasLabel()) {
         int pos = (int) (p.getFilePointer() - startPos);
         labelMap.put(rs.getLabel(), pos);
-        System.out.println(rs.getLabel() + "   added with  " + pos);
       }
       rs = p.getNextCommand();
     }
