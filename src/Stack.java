@@ -16,7 +16,7 @@ public class Stack {
   }
 
   private int getPointer(int jump) {
-    return jump / 4;
+    return jump;
   }
 
   public int getValueAt(int address) {
