@@ -60,8 +60,8 @@ public class Main {
   private static String takeArguments(String[] args) {
     //assuming the fileName is written in args[0];
     if (args.length > 0) {
-      if (args.length > 1) {
-        Debug.startDebugging(args[1]);
+      if (args.length > 2) {
+        Debug.startDebugging(args[2]);
       }
       return args[0];
     } else {

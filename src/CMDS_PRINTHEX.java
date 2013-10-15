@@ -15,7 +15,9 @@ public class CMDS_PRINTHEX extends RISCInstruction {
     //iterating to create a string to be printed
     while (count-- > 0) {
       int valueAtAddress = Main.stack.getValueAt(stackStart++);
-      strObtaines += " " + Integer.toHexString(valueAtAddress);
+      String add = Integer.toHexString(valueAtAddress);
+      if (add.length() == 1) add += "0";
+      strObtaines += add + " ";
     }
 
 

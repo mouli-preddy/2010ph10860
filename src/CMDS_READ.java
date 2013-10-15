@@ -11,7 +11,7 @@ public class CMDS_READ extends RISCInstruction {
   public static void exeCmd(RISCInstruction risc) {
     //Create a string tokenizer with the input from Main.getNextLine();
     String input = Main.readNextLine();
-    input.replace("0x", "");
+    input = input.replace("0x", "");
     StringTokenizer st = new StringTokenizer(input, " ");
 
 
@@ -23,7 +23,8 @@ public class CMDS_READ extends RISCInstruction {
       address--;
 
       //get the value t be stored
-      int valueToStore = Integer.parseInt(st.nextToken(), 16);
+      String nextToken = st.nextToken();
+      int valueToStore = Integer.parseInt(nextToken, 16);
 
       //store value int the given address.
       Main.stack.setValueAt(address, valueToStore);
