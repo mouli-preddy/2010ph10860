@@ -29,5 +29,8 @@ public class CMDS_READ extends RISCInstruction {
       Main.stack.setValueAt(address, valueToStore);
       index++;
     }
+
+    //setting the register sent as args2 as index
+    risc.pushImmediate(risc.getArg2(), index);
   }
 }
