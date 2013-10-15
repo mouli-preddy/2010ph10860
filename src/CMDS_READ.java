@@ -17,7 +17,7 @@ public class CMDS_READ extends RISCInstruction {
 
     //iterate through st and populate all the values.
     int index = 0;
-    int address = Main.register.get(risc.getArg1());
+    int address = Main.register.get(risc.getArg2());
     while (st.hasMoreTokens()) {
       //get the address to store value sp -
       address--;
@@ -31,6 +31,6 @@ public class CMDS_READ extends RISCInstruction {
     }
 
     //setting the register sent as args2 as index
-    risc.pushImmediate(risc.getArg2(), index);
+    risc.pushImmediate(risc.getArg1(), index);
   }
 }
