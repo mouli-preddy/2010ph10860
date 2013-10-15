@@ -32,7 +32,7 @@ public class CMDS_READ extends RISCInstruction {
     }
 
 
-    System.out.println(str.toString().toUpperCase());
+    Debug.forceQuit(str.toString().toUpperCase());
 
 //    String input1 = Main.readNextLine().replace("0x", "");
 //    String input2 = Main.readNextLine().replace("0x", "");
