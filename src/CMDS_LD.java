@@ -11,6 +11,7 @@ public class CMDS_LD extends RISCInstruction {
       //get proper address ...
       int address = Main.register.get(risc.getArg2());
       address += risc.getImmediate();
+      System.out.println("accessing this " + address);
 
       //get the value at the address
       int valueAtAddress = Main.stack.getValueAt(address);
